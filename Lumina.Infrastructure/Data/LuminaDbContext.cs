@@ -9,5 +9,6 @@ namespace Lumina.Infrastructure.Data
         {
         }
         public DbSet<Reading> Readings { get; set; }
+        public DbSet<Meter> Meters { get; set; }
     }
 }

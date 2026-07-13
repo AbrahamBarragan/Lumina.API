@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Lumina.Application\Lumina.Application.csproj" />
     <ProjectReference Include="..\Lumina.Domain\Lumina.Domain.csproj" />
   </ItemGroup>
 
