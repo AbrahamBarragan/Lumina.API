@@ -9,9 +9,11 @@ namespace Lumina.API.Controllers
     public class ReadingsController : ControllerBase
     {
         private readonly IReadingRepository _readingRepository;
-        public ReadingsController(IReadingRepository readingRepository)
+        private readonly ConsumptionService _consumptionService;
+        public ReadingsController(IReadingRepository readingRepository, ConsumptionService consumptionService)
         {
             _readingRepository = readingRepository;
+            _consumptionService = consumptionService;
         }
 
         [HttpPost]
@@ -27,6 +29,20 @@ namespace Lumina.API.Controllers
         {
             var readings = await _readingRepository.ListAsync(meterId);
             return Ok(readings);
+        }
+
+        [HttpGet("{meterId}/consumption")]
+        public async Task<IActionResult> GetConsumption(int meterId)
+        {
+            try
+            {
+                var consumption = await _consumptionService.CalculateConsumptionAsync(meterId);
+                return Ok(consumption);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

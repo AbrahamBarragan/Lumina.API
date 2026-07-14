@@ -1,5 +1,6 @@
 using Lumina.Application.Features.Meters;
 using Lumina.Application.Features.Readings;
+using Lumina.Domain.Services;
 using Lumina.Infrastructure.Data;
 using Lumina.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,8 @@ builder.Services.AddDbContext<LuminaDbContext>(options =>
 
 builder.Services.AddScoped<IReadingRepository, ReadingRepository>();
 builder.Services.AddScoped<IMeterRepository, MeterRepository>();
+builder.Services.AddScoped<ConsumptionCalculator>();
+builder.Services.AddScoped<ConsumptionService>();
 
 var app = builder.Build();
 
