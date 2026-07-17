@@ -11,5 +11,6 @@
 
         public int Id { get; private set; }
         public string SerialNumber { get; private set; }
+        public ICollection<Reading> Readings { get; private set; } = new List<Reading>();
     }
 }

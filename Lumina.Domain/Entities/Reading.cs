@@ -22,5 +22,6 @@
         public int MeterId { get; private set; }
         public decimal Value { get; private set; }
         public DateTime ReadingDate { get; private set; }
+        public Meter? Meter { get; private set; }
     }
 }
