@@ -44,5 +44,18 @@ namespace Lumina.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("{meterId}/estimated-cost")]
+        public async Task<IActionResult> GetEstimatedCost(int meterId)
+        {
+            try
+            {
+                var cost = await _consumptionService.CalculateCostAsync(meterId);
+                return Ok(cost);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

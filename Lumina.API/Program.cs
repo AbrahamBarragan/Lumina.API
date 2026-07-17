@@ -16,6 +16,9 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<LuminaDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.Configure<ElectricityRateOptions>(
+    builder.Configuration.GetSection("ElectricityRate"));
+
 builder.Services.AddScoped<IReadingRepository, ReadingRepository>();
 builder.Services.AddScoped<IMeterRepository, MeterRepository>();
 builder.Services.AddScoped<ConsumptionCalculator>();
