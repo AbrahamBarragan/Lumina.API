@@ -1,6 +1,7 @@
 ﻿using Lumina.Application.Features.Meters;
 using Lumina.Infrastructure.Data;
 using Lumina.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lumina.Infrastructure.Repositories
 {
@@ -22,6 +23,10 @@ namespace Lumina.Infrastructure.Repositories
         public async Task<Meter?> GetMeterAsync(int id)
         {
             return await _context.Meters.FindAsync(id);
+        }
+        public async Task<List<Meter>> ListAsync()
+        {
+            return await _context.Meters.ToListAsync();
         }
     }
 }

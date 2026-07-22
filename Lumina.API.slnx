@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="Lumina.API/Lumina.API.csproj" />
+  <Project Path="Lumina.Application.Tests/Lumina.Application.Tests.csproj" />
   <Project Path="Lumina.Application/Lumina.Application.csproj" Id="0b7dd448-0aec-42b2-8c05-3c4ddde4dd73" />
   <Project Path="Lumina.Domain.Tests/Lumina.Domain.Tests.csproj" Id="e308e69f-2372-4718-848e-0c0e4a5c4ef7" />
   <Project Path="Lumina.Domain/Lumina.Domain.csproj" Id="ceba2c32-d346-47ca-9376-1ec016013366" />

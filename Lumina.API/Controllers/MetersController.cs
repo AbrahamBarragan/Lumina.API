@@ -22,5 +22,19 @@ namespace Lumina.API.Controllers
             await _meterRepository.AddAsync(meter);
             return Ok();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetMeters()
+        {
+            var meters = await _meterRepository.ListAsync();
+            return Ok(meters);
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetMeter(int id)
+        {
+            var meter = await _meterRepository.GetMeterAsync(id);
+            if (meter == null)
+                return NotFound($"Meter with id {id} does not exist.");
+            return Ok(meter);
+        }
     }
 }
