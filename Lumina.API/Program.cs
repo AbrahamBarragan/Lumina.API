@@ -23,6 +23,7 @@ builder.Services.AddScoped<IReadingRepository, ReadingRepository>();
 builder.Services.AddScoped<IMeterRepository, MeterRepository>();
 builder.Services.AddScoped<ConsumptionCalculator>();
 builder.Services.AddScoped<ConsumptionService>();
+builder.Services.AddScoped<ReadingService>();
 
 var app = builder.Build();
 

@@ -31,7 +31,7 @@ namespace Lumina.Application.Features.Readings
 
             return _calculator.Calculate(firstReading, lastReading);
         }
-        public async Task<decimal> CalculateCostAsync(int meterId)
+        public async Task<decimal> CalculateEstimatedCostAsync(int meterId)
         {
             var consumption = await CalculateConsumptionAsync(meterId);
             return consumption * _pricePerKwh;

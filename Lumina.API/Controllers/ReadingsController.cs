@@ -1,5 +1,4 @@
 ﻿using Lumina.Application.Features.Readings;
-using Lumina.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lumina.API.Controllers
@@ -10,18 +9,26 @@ namespace Lumina.API.Controllers
     {
         private readonly IReadingRepository _readingRepository;
         private readonly ConsumptionService _consumptionService;
-        public ReadingsController(IReadingRepository readingRepository, ConsumptionService consumptionService)
+        private readonly ReadingService _readingService;
+        public ReadingsController(IReadingRepository readingRepository, ConsumptionService consumptionService, ReadingService readingService)
         {
             _readingRepository = readingRepository;
             _consumptionService = consumptionService;
+            _readingService = readingService;
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateReading(CreateReadingRequest request)
         {
-            var reading = new Reading(request.MeterId, request.Value, request.ReadingDate);
-            await _readingRepository.AddAsync(reading);
-            return Ok();
+            try
+            {
+                await _readingService.CreateReadingAsync(request.MeterId, request.Value, request.ReadingDate);
+                return Ok();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("{meterId}")]
@@ -49,7 +56,7 @@ namespace Lumina.API.Controllers
         {
             try
             {
-                var cost = await _consumptionService.CalculateCostAsync(meterId);
+                var cost = await _consumptionService.CalculateEstimatedCostAsync(meterId);
                 return Ok(cost);
             }
             catch (InvalidOperationException ex)
